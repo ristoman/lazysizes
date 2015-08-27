@@ -95,7 +95,7 @@
 		var lastTime = 0;
 		var Date = window.Date;
 		var requestIdleCallback = window.requestIdleCallback;
-		var tDelay = 125;
+		var tDelay = 99;
 		var run = function(){
 			running = false;
 			lastTime = Date.now();
@@ -109,9 +109,9 @@
 		};
 
 		if(requestIdleCallback){
-			tDelay = 60;
+			tDelay = 66;
 			getAF = function(){
-				requestIdleCallback(run);
+				requestIdleCallback(run, 66);
 			};
 		}
 
