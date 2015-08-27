@@ -94,6 +94,8 @@
 		var running;
 		var lastTime = 0;
 		var Date = window.Date;
+		var requestIdleCallback = window.requestIdleCallback;
+		var tDelay = 125;
 		var run = function(){
 			running = false;
 			lastTime = Date.now();
@@ -106,11 +108,18 @@
 			rAF(afterAF);
 		};
 
+		if(requestIdleCallback){
+			tDelay = 60;
+			getAF = function(){
+				requestIdleCallback(run);
+			};
+		}
+
 		return function(){
 			if(running){
 				return;
 			}
-			var delay = lazySizesConfig.throttle - (Date.now() - lastTime);
+			var delay = tDelay - (Date.now() - lastTime);
 
 			running =  true;
 
@@ -565,8 +574,7 @@
 			init: true,
 			expFactor: 2,
 			expand: 359,
-			loadMode: 2,
-			throttle: 125
+			loadMode: 2
 		};
 
 		lazySizesConfig = window.lazySizesConfig || window.lazysizesConfig || {};
