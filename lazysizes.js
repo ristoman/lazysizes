@@ -112,15 +112,13 @@
 				requestIdleCallback(run);
 			};
 		}
-
 		return function(){
 			if(running){
 				return;
 			}
-			var delay = 111 - (Date.now() - lastTime);
-
+			var delay = 120 - (Date.now() - lastTime);
 			running =  true;
-			if(delay < 1){
+			if(delay < 0){
 				getAF();
 			} else {
 				setTimeout(getAF, delay);
