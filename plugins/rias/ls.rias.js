@@ -78,7 +78,7 @@
 		parent = elem.parentNode;
 
 		options = {
-			isPicture: !!(parent && regPicture.test(parent.nodeName || '')),
+			isPicture: !!(parent && regPicture.test(parent.nodeName || ''))
 		};
 
 		setOption = function(attr, run){
@@ -115,8 +115,9 @@
 			}
 		});
 
-		var elemStyles = window.getComputedStyle(elem)
+		var elemStyles = window.getComputedStyle(elem);
 		var aspectRatio = elemStyles.getPropertyValue('--aspect-ratio');
+		options['aspectRatio'] = aspectRatio;
 
 		return options;
 	}
