@@ -9,6 +9,7 @@
 	var regNumber = /^\-*\+*\d+\.*\d*$/;
 	var regPicture = /^picture$/i;
 	var regWidth = /\s*\{\s*width\s*\}\s*/i;
+	var regAspectRatio = /\s*\{\s*aspectratio\s*\}\s*/i;
 	var regPlaceholder = /\s*\{\s*([a-z0-9]+)\s*\}\s*/ig;
 	var regObj = /^\[.*\]|\{.*\}$/;
 	var regAllowedSizes = /^(?:auto|\d+(px)?)$/;
@@ -75,8 +76,9 @@
 
 
 		parent = elem.parentNode;
+
 		options = {
-			isPicture: !!(parent && regPicture.test(parent.nodeName || ''))
+			isPicture: !!(parent && regPicture.test(parent.nodeName || '')),
 		};
 
 		setOption = function(attr, run){
@@ -113,6 +115,9 @@
 			}
 		});
 
+		var elemStyles = window.getComputedStyle(elem)
+		var aspectRatio = elemStyles.getPropertyValue('--aspect-ratio');
+
 		return options;
 	}
 
@@ -132,13 +137,14 @@
 
 		options.widths.forEach(function(width){
 			var candidate = {
-				u: url.replace(regWidth, options.widthmap[width] || width),
+				u: url.replace(regWidth, options.widthmap[width] || width).replace(regAspectRatio, options['aspectRatio']),
 				w: width
 			};
 
 			candidates.push(candidate);
 			candidates.srcset.push( (candidate.c = candidate.u + ' ' + width + 'w') );
 		});
+
 		return candidates;
 	}
 
