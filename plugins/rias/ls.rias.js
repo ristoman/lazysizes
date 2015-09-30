@@ -9,7 +9,7 @@
 	var regNumber = /^\-*\+*\d+\.*\d*$/;
 	var regPicture = /^picture$/i;
 	var regWidth = /\s*\{\s*width\s*\}\s*/i;
-	var regAspectRatio = /\s*\{\s*aspectratio\s*\}\s*/i;
+	var regAspectRatio = /\s*\{\s*aspect-ratio\s*\}\s*/i;
 	var regPlaceholder = /\s*\{\s*([a-z0-9]+)\s*\}\s*/ig;
 	var regObj = /^\[.*\]|\{.*\}$/;
 	var regAllowedSizes = /^(?:auto|\d+(px)?)$/;
