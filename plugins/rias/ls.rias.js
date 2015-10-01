@@ -116,7 +116,7 @@
 		});
 
 		var elemStyles = window.getComputedStyle(elem);
-		var aspectRatio = elemStyles.getPropertyValue('--aspect-ratio');
+		var aspectRatio = elemStyles.getPropertyValue('--aspect-ratio') || '';
 		options['aspectRatio'] = aspectRatio;
 
 		return options;
@@ -204,7 +204,7 @@
 			}
 		}
 
-		if ( hasPlaceholder || regWidth.test(src) ){
+		if ( hasPlaceholder || regWidth.test(src) || regAspectRatio.test(src)){
 			setSrc(src, elemOpts, elem);
 			modified = true;
 		} else if (modified) {
